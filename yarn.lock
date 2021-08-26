@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@calcit/procs@^0.4.4":
-  version "0.4.4"
-  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.4.4.tgz#4fce1ed0702a664d8a849edf9db20636a67ff0cc"
-  integrity sha512-udRobN0r9ZQFskG9J9jaL02PgCtlzK4X5RhDlvmq5rWREBrygONOb9is4TkvIS+Y5HXIPV69Sfi6cP6y1V7zdA==
+"@calcit/procs@^0.4.20":
+  version "0.4.20"
+  resolved "https://registry.npmjs.org/@calcit/procs/-/procs-0.4.20.tgz#51163173cd56fe89779141a474afa0ee4e300674"
+  integrity sha512-qXx4X+u15BaniGUQKAeH6UncjIWpQCOS5ZDf8dNoPHEm5d+5i9a/oDcZj1fxzsiwD+SDbpE8XpJHuPziq+s1ow==
   dependencies:
     "@calcit/ternary-tree" "0.0.16"
     "@cirru/parser.ts" "^0.0.3"
@@ -285,6 +285,11 @@ commander@^7.0.0:
   resolved "https://registry.npmjs.org/commander/-/commander-7.2.0.tgz#a36cb57d0b501ce108e4d20559a150a391d97ab7"
   integrity sha512-QrWXB+ZQSVPmIWIhtEO9H+gwHaMGYiF5ChvoJ+K9ZGHG/sVsa6yiesAD1GC/x46sET00Xlwo1u49RVVVzvcSkw==
 
+commander@latest:
+  version "8.1.0"
+  resolved "https://registry.npmjs.org/commander/-/commander-8.1.0.tgz#db36e3e66edf24ff591d639862c6ab2c52664362"
+  integrity sha512-mf45ldcuHSYShkplHHGKWb4TrmwQadxOn7v4WuhDJy0ZVoY5JFajaRDKD0PNe5qXzBX0rhovjTnP6Kz9LETcuA==
+
 cross-spawn@^7.0.3:
   version "7.0.3"
   resolved "https://registry.npmjs.org/cross-spawn/-/cross-spawn-7.0.3.tgz#f73a85b9d5d41d045551c177e2882d4ac85728a6"
@@ -311,6 +316,13 @@ envinfo@^7.7.3:
   version "7.8.1"
   resolved "https://registry.npmjs.org/envinfo/-/envinfo-7.8.1.tgz#06377e3e5f4d379fea7ac592d5ad8927e0c4d475"
   integrity sha512-/o+BXHmB7ocbHEAs6F2EnG0ogybVVUdkRunTT2glZU9XAaGmhqskrvKwqXuDfNjEO0LZKWdejEEpnq8aM0tOaw==
+
+equals@latest:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/equals/-/equals-1.0.5.tgz#212062dde5e1a510d955f13598efcc6a621b6ace"
+  integrity sha1-ISBi3eXhpRDZVfE1mO/MamIbas4=
+  dependencies:
+    jkroso-type "1"
 
 es-module-lexer@^0.6.0:
   version "0.6.0"
@@ -477,6 +489,20 @@ jest-worker@^27.0.2:
     "@types/node" "*"
     merge-stream "^2.0.0"
     supports-color "^8.0.0"
+
+jkroso-type@1:
+  version "1.1.1"
+  resolved "https://registry.npmjs.org/jkroso-type/-/jkroso-type-1.1.1.tgz#bc4ced6d6c45fe0745282bafc86a9f8c4fc9ce61"
+  integrity sha1-vEztbWxF/gdFKCuvyGqfjE/JzmE=
+
+jsedn@^0.4.1:
+  version "0.4.1"
+  resolved "https://registry.npmjs.org/jsedn/-/jsedn-0.4.1.tgz#5155f567450a7b94078414efdda90338a5d339c1"
+  integrity sha1-UVX1Z0UKe5QHhBTv3akDOKXTOcE=
+  dependencies:
+    commander latest
+    equals latest
+    type-component latest
 
 json-parse-better-errors@^1.0.2:
   version "1.0.2"
@@ -743,6 +769,11 @@ terser@^5.7.0:
     commander "^2.20.0"
     source-map "~0.7.2"
     source-map-support "~0.5.19"
+
+type-component@latest:
+  version "0.0.1"
+  resolved "https://registry.npmjs.org/type-component/-/type-component-0.0.1.tgz#952a6c81c21efd24d13d811d0c8498cb860e1956"
+  integrity sha1-lSpsgcIe/STRPYEdDISYy4YOGVY=
 
 uri-js@^4.2.2:
   version "4.4.1"

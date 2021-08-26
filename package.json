@@ -1,6 +1,7 @@
 {
   "dependencies": {
-    "@calcit/procs": "^0.4.4"
+    "@calcit/procs": "^0.4.20",
+    "jsedn": "^0.4.1"
   },
   "scripts": {
     "watch-server": "cr --emit-js",

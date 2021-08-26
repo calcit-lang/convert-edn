@@ -8,18 +8,21 @@
       :ns $ quote
         ns app.main $ :require
           app.test :refer $ run-tests
+          "\"fs" :as fs
+          "\"jsedn" :as jsedn
       :defs $ {}
         |main! $ quote
-          defn main! () $ if
-            = "\"ci" $ get-env "\"mode"
-            run-tests
-            echo "|Run app"
-        |reload! $ quote
-          defn reload! () $ echo "\"Reloaded."
+          defn main! () (echo "|Run app") (convert-file!)
         |on-error $ quote
           defn on-error (message) (; draw-error-message message)
-      :proc $ quote ()
-      :configs $ {} (:extension nil)
+        |convert-file! $ quote
+          defn convert-file! ()
+            fs/writeFileSync "\"data/target.cirru" $ format-cirru-edn
+              to-calcit-data $ jsedn/toJS
+                jsedn/parse $ fs/readFileSync "\"data/source.edn" "\"utf8"
+            println "\"Finished"
+        |reload! $ quote
+          defn reload! () (convert-file!) (echo "\"Reloaded.")
     |app.test $ {}
       :ns $ quote
         ns app.test $ :require
@@ -30,5 +33,3 @@
         |test-add $ quote
           deftest test-add $ testing |add
             is $ = 2 (+ 1 1)
-      :proc $ quote ()
-      :configs $ {}
