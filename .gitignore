@@ -4,5 +4,6 @@
 
 js-out/
 node_modules
+.yarn/
 
 example/
