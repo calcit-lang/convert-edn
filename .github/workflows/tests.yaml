@@ -62,3 +62,4 @@ jobs:
         run: |
           calcit calcit.cirru js
           node main.mjs
+          git diff --exit-code -- data/target.cirru
