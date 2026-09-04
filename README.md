@@ -1,20 +1,23 @@
 
-EDN convert to Cirru EDN
-----
+# EDN to Cirru EDN converter
 
-### Usages
+Convert `data/source.edn` to `data/target.cirru` with Calcit 0.13.77.
+
+## Usage
 
 ```bash
-yarn
-cr --emit-js
-yarn webpack
-node js-out/bundle.js
+corepack yarn install --immutable
+caps --ci --strict
+calcit calcit.cirru js
+node main.mjs
 ```
 
-### Workflow
+Run the built-in Calcit test with:
 
-https://github.com/calcit-lang/calcit-workflow
+```bash
+calcit calcit.cirru test --require-match
+```
 
-### License
+## License
 
 MIT
