@@ -8,17 +8,35 @@
   :files $ {}
     'app.main $ %{} 'FileEntry
       :defs $ {}
+        'JsEdnHost $ %{} 'CodeEntry (:doc |)
+          :code $ quote
+            deftrait JsEdnHost
+              .parse $ :: 'Fn
+                {}
+                  :args $ [] 'app.main/JsEdnHost 'String
+                  :return 'JsObject
+              .toJS $ :: 'Fn
+                {}
+                  :args $ [] 'app.main/JsEdnHost 'JsObject
+                  :return 'JsObject
+          :examples $ []
+          :ffi $ {} (:backend :js) (:kind :external-object)
+          :schema $ :: 'Trait
         'convert-file! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn convert-file! ()
-              fs/writeFileSync |data/target.cirru $ format-cirru-edn
-                to-calcit-data $ .!toJS jsedn
-                  .!parse jsedn $ fs/readFileSync |data/source.edn |utf8
+              let
+                  edn-host $ unsafe-coerce jsedn 'app.main/JsEdnHost
+                  parsed $ .!parse edn-host (fs/readFileSync |data/source.edn |utf8)
+                  js-data $ .!toJS edn-host parsed
+                  content $ format-cirru-edn (to-calcit-data js-data)
+                fs/writeFileSync |data/target.cirru content
               println |Finished
           :examples $ []
           :schema $ :: 'Fn
             {} (:return 'Unit)
               :args $ []
+              :features $ #{} :js-ffi
         'main! $ %{} 'CodeEntry (:doc |)
           :code $ quote
             defn main! () (echo "|Run app") (convert-file!)
