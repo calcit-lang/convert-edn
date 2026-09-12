@@ -1,7 +1,7 @@
 
 # EDN to Cirru EDN converter
 
-Convert `data/source.edn` to `data/target.cirru` with Calcit 0.13.77.
+Convert `data/source.edn` to `data/target.cirru` with Calcit 0.14.8.
 
 ## Usage
 
