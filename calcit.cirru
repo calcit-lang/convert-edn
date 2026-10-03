@@ -43,7 +43,7 @@
             :code $ quote $ is= 2 (+ 1 1)
             :tags $ #{} :unit
         'on-error $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defn on-error (message) (; draw-error-message message)
+          :code $ quote $ defn on-error (message) (; draw-error-message message) &unit
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ [] 'String
