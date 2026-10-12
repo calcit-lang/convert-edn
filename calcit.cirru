@@ -25,8 +25,8 @@
           :code $ quote $ defn convert-file! ()
             let
                 edn-host $ unsafe-coerce jsedn 'app.main/JsEdnHost
-                parsed $ .!parse edn-host $ fs/readFileSync |data/source.edn |utf8
-                js-data $ .!toJS edn-host parsed
+                parsed $ .parse edn-host $ fs/readFileSync |data/source.edn |utf8
+                js-data $ .toJS edn-host parsed
                 content $ format-cirru-edn $ to-calcit-data js-data
               fs/writeFileSync |data/target.cirru content
             println |Finished
