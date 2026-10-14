@@ -37,7 +37,7 @@ jobs:
 
       - uses: calcit-lang/setup-calcit@v1.5.0
         with:
-          version: "0.29.1"
+          version: "0.29.3"
           tools: calcit,caps
           caps-version: "0.1.1"
 
@@ -55,6 +55,7 @@ jobs:
           calcit calcit.cirru edit format
           git diff --exit-code -- calcit.cirru
           calcit calcit.cirru --check-only --all-defs
+          calcit calcit.cirru fix --workflow strict --verify --format json
 
       - name: Run Calcit tests
         run: calcit calcit.cirru test --require-match

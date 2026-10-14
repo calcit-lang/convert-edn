@@ -25,11 +25,12 @@
           :code $ quote $ defn convert-file! ()
             let
                 edn-host $ unsafe-coerce jsedn 'app.main/JsEdnHost
-                parsed $ .parse edn-host $ fs/readFileSync |data/source.edn |utf8
+                parsed $ .parse edn-host $ decode-map-as (fs/readFileSync |data/source.edn |utf8) 'String
                 js-data $ .toJS edn-host parsed
                 content $ format-cirru-edn $ to-calcit-data js-data
               fs/writeFileSync |data/target.cirru content
             println |Finished
+            , &unit
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
@@ -48,7 +49,7 @@
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ [] 'String
         'reload! $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ defn reload! () (convert-file!) (echo |Reloaded.)
+          :code $ quote $ defn reload! () (convert-file!) (echo |Reloaded.) &unit
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
