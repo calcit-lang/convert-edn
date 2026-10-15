@@ -11,21 +11,16 @@
     %{} 'FileEntry
       :defs $ {}
         'JsEdnHost $ %{} 'CodeEntry (:doc |)
-          :code $ quote $ deftrait JsEdnHost
-            .parse $ :: 'Fn $ {}
-              :args $ [] 'app.main/JsEdnHost 'String
-              :return 'JsObject
-            .toJS $ :: 'Fn $ {}
-              :args $ [] 'app.main/JsEdnHost 'JsObject
-              :return 'JsObject
+          :code $ quote $ deftrait JsEdnHost (.parse 'Fn) (.toJS 'Fn)
           :examples $ []
-          :ffi $ {} (:backend :js) (:kind :external-object)
+          :ffi $ {} (:backend :js) (:kind :external-object) (:target :node)
           :schema $ :: 'Trait
         'convert-file! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn convert-file! ()
             let
-                edn-host $ unsafe-coerce jsedn 'app.main/JsEdnHost
-                parsed $ .parse edn-host $ decode-map-as (fs/readFileSync |data/source.edn |utf8) 'String
+                edn-host $ js-cast jsedn 'app.main/JsEdnHost
+                source $ decode-map-as (fs/readFileSync |data/source.edn |utf8) 'String
+                parsed $ .parse edn-host source
                 js-data $ .toJS edn-host parsed
                 content $ format-cirru-edn $ to-calcit-data js-data
               fs/writeFileSync |data/target.cirru content
