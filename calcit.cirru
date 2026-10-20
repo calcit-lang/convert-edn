@@ -25,7 +25,6 @@
                 content $ format-cirru-edn $ to-calcit-data js-data
               fs/writeFileSync |data/target.cirru content
             println |Finished
-            , &unit
           :examples $ []
           :schema $ :: 'Fn $ {} (:return 'Unit)
             :args $ []
