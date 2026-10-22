@@ -62,6 +62,24 @@ jobs:
 
       - name: Compile and run JavaScript target
         run: |
+          set -euo pipefail
           yarn build
           node main.mjs
           git diff --exit-code -- data/target.cirru
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { execFileSync } from 'node:child_process';
+          import { mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+          import { tmpdir } from 'node:os';
+          import { join, resolve } from 'node:path';
+          import { parse_cirru_edn, _$n__$e_ } from '@calcit/procs';
+          const fixture = mkdtempSync(join(tmpdir(), 'convert-edn-'));
+          mkdirSync(join(fixture, 'data'));
+          writeFileSync(join(fixture, 'data/source.edn'),
+            '{:nested {:items [1 true nil "031 转换 🐈"]} :empty ()}');
+          execFileSync(process.execPath, [resolve('main.mjs')], { cwd: fixture, stdio: 'inherit' });
+          const actual = parse_cirru_edn(readFileSync(join(fixture, 'data/target.cirru'), 'utf8'));
+          const expected = parse_cirru_edn('{} (:nested ({} (:items ([] 1 true nil "|031 转换 🐈")))) (:empty ([]))');
+          assert.ok(_$n__$e_(actual, expected), 'nested/empty/nil/Unicode file conversion');
+          console.log('Isolated file conversion passed');
+          NODE
