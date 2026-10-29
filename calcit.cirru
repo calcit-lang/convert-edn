@@ -14,7 +14,7 @@
           :code $ quote $ deftrait JsEdnHost (.parse 'Fn) (.toJS 'Fn)
           :examples $ []
           :ffi $ {} (:backend :js) (:kind :external-object) (:target :node)
-          :schema $ :: 'Trait
+          :schema $ quote Trait
         'convert-file! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn convert-file! ()
             let
@@ -26,27 +26,22 @@
               fs/writeFileSync |data/target.cirru content
             println |Finished
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
-            :features $ #{} :js-ffi
+          :schema $ quote $ Fn (-> Unit) (:features :js-ffi)
         'main! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn main! () (echo "|Run app") (convert-file!)
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
           :tests $ [] $ %{} 'TestEntry (:name |test-add)
             :code $ quote $ is= 2 (+ 1 1)
             :tags $ #{} :unit
         'on-error $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn on-error (message) (; draw-error-message message) &unit
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ [] 'String
+          :schema $ quote $ Fn String (-> Unit)
         'reload! $ %{} 'CodeEntry (:doc |)
           :code $ quote $ defn reload! () (convert-file!) (echo |Reloaded.) &unit
           :examples $ []
-          :schema $ :: 'Fn $ {} (:return 'Unit)
-            :args $ []
+          :schema $ quote $ Fn (-> Unit)
       :ns $ %{} 'NsEntry (:doc |)
         :code $ quote $ ns app.main
           :require (|fs :as fs) (|jsedn :default jsedn)
