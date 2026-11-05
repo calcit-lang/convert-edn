@@ -12,8 +12,8 @@
       :defs $ {}
         'JsEdnHost $ %{} 'CodeEntry (:doc |)
           :code $ quote $ deftrait JsEdnHost
-            .parse $ quote $ Fn app.main/JsEdnHost String (-> Dynamic)
-            .toJS $ quote $ Fn app.main/JsEdnHost Dynamic (-> Dynamic)
+            .parse $ Fn app.main/JsEdnHost String $ -> Dynamic
+            .toJS $ Fn app.main/JsEdnHost Dynamic $ -> Dynamic
           :examples $ []
           :ffi $ {} (:backend :js) (:kind :external-object) (:target :node)
           :schema $ quote Trait
