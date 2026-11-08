@@ -1,13 +1,13 @@
 # EDN to Cirru EDN converter
 
-使用配对的正式 Calcit / `@calcit/procs` **0.35.1** 将 `data/source.edn` 转换为 `data/target.cirru`。运行转换会覆盖目标文件，请先保留需要的旧输出。
+使用配对的正式 Calcit / `@calcit/procs` **0.37.0** 将 `data/source.edn` 转换为 `data/target.cirru`。运行转换会覆盖目标文件，请先保留需要的旧输出。
 
 0.0.14 同步升级 CLI 和运行时。转换继续使用 jsedn 0.4.1 和原来的输入输出路径。
 CLI 和 runtime 必须一起升级，已有 JS 应重新编译；0.0.14 为未发布候选，不发布 npm 包。
 
 ## 使用
 
-需要 Calcit 0.35.1、caps 0.1.1、Node.js 24 和 Yarn 4.18.0：
+需要 Calcit 0.37.0、caps 0.1.1、Node.js 24 和 Yarn 4.18.0：
 
 ```bash
 corepack yarn install --immutable
