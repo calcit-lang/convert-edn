@@ -1,13 +1,13 @@
 # EDN to Cirru EDN converter
 
-使用配对的正式 Calcit / `@calcit/procs` **0.45.1** 将 `data/source.edn` 转换为 `data/target.cirru`。运行转换会覆盖目标文件，请先保留需要的旧输出。
+使用配对的正式 Calcit / `@calcit/procs` **0.46.0** 将 `data/source.edn` 转换为 `data/target.cirru`。运行转换会覆盖目标文件，请先保留需要的旧输出。
 
 当前源码同步升级 CLI 和运行时。转换继续使用 jsedn 0.4.1 和原来的输入输出路径。
 从旧版本升级时请配对工具链并重新生成 JS。已有的 0.0.14 tag 请使用该 tag 声明的工具链。
 
 ## 使用
 
-需要 Calcit 0.45.1、caps 0.1.2、Node.js 24 和 Yarn 4.18.0：
+需要 Calcit 0.46.0、caps 0.1.2、Node.js 24 和 Yarn 4.18.0：
 
 ```bash
 corepack yarn install --immutable
@@ -24,7 +24,7 @@ jsedn 的解析与转换结果保留开放 JS 数据合同，不能假称它们�
 宿主边界检查 parse/toJS 为可调用成员；文件输入检查 String，结果经原 to-calcit-data 转换。
 两个方法现在声明完整的接收者、参数与返回类型：`parse(String) → Dynamic`、
 `toJS(Dynamic) → Dynamic`，不再使用省略参数和返回值的 bare Fn。
-解析结果可包含基本值、空值和开放宿主对象。Calcit 0.45.1 支持具名宿主 trait 作为 union 成员，但裸 JsObject 和宿主空值不能直接作为 union 成员；此处保留开放边界，避免把 jsedn 的完整输出误标为已受检。
+解析结果可包含基本值、空值和开放宿主对象。这里的宿主返回值尚未通过完整结构化解码，因此保留开放边界，避免把 jsedn 的完整输出误标为已受检。
 FFI 注解不等于运行时验证全部返回数据；这里只收紧已核对的方法调用，
 不增加强转或放宽门禁。四个原函数代码及全部附带测试、元数据保持不变。
 
